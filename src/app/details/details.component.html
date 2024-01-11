@@ -1,0 +1,33 @@
+<div class="container mt-5">
+   <div class="converter-container my-5">
+      <app-currency-converter [amount]="amount" [fromCurrency]="from" [toCurrency]="to" [convertedAmount]="converted"
+         [isHome]="false"></app-currency-converter>
+
+
+      <div class="container mt-5" *ngIf="amount && fromCode">
+         <h6 class="">When the amount = <strong style="font-size: 22px; color: green;"><i>{{amount}}</i></strong></h6>
+      </div>
+
+      <div class="row mb-2" *ngIf="amount && fromCode">
+         <div class="col-lg-12 col-md-12 col-sm-12">
+            <app-historical-table [fromKey]="fromCode" [toKey]="toCode" [convertedAmountInLastDay]="convertedAmountLastDay"
+               [convertedAmountInLastMonth]="convertedAmountLastMonth" [convertedAmountInLastYear]="convertedAmountLastYear"></app-historical-table>
+         </div>
+      </div>
+
+      <!-- List showing to constant currencies -->
+      <div class="row" *ngIf="amount && fromCode">
+         <div class="col-lg-6 col-md-12 col-sm-12">
+            <app-currencies-table [header1]="'From'" [header2]="'To'" [header3]="'Converted Amount'"
+               [fromInput]="staticFromCurrencies" [data]="staticToCurrencies" [amount]="amount" [devideValue]="fromRate"
+               [muliValue]="toRate"></app-currencies-table>
+         </div>
+
+         <div class="col-lg-6 col-md-12 col-sm-12">
+            <app-currencies-table [header1]="'From'" [header2]="'To'" [header3]="'Converted Amount'"
+               [fromInput]="staticToCurrencies" [data]="staticFromCurrencies" [amount]="amount" [devideValue]="toRate"
+               [muliValue]="fromRate"></app-currencies-table>
+         </div>
+      </div>
+   </div>
+</div>

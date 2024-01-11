@@ -1,0 +1,22 @@
+<div class="card mb-2">
+    <div class="card-body">
+        <div class="table-responsive-md">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{header1}}</th>
+                        <th>{{header2}}</th>
+                        <th>{{header3}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let option of data ; let i=index">
+                        <td>{{fromInput[i]}}</td>
+                        <td>{{option}}</td>
+                        <td>{{(amount / devideValue[i]) * muliValue[i] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

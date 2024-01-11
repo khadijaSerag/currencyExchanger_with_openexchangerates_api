@@ -1,0 +1,27 @@
+.swap {
+  border: none;
+  transition: all 0.5s;
+}
+.swap:focus {
+  box-shadow: 0 0 0 0.2rem #fff !important;
+}
+.swap:hover {
+  color: rgb(97, 82, 82);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+h2 {
+  text-align: center;
+}
+
+.detail {
+  margin-left: 10px;
+}
