@@ -5,25 +5,23 @@ import { FormsModule } from '@angular/forms';
 import { NumbersTableComponent } from './components/numbers-table/numbers-table.component';
 import { CurrenciesTableComponent } from './components/currencies-table/currencies-table.component';
 import { HistoricalTableComponent } from './components/historical-table/historical-table.component';
-
-
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     SelectComponent,
     NumbersTableComponent,
     CurrenciesTableComponent,
-    HistoricalTableComponent
+    HistoricalTableComponent,
+    SpinnerComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  exports:[
+  imports: [CommonModule, FormsModule],
+  exports: [
     SelectComponent,
     NumbersTableComponent,
     CurrenciesTableComponent,
-    HistoricalTableComponent
-  ]
+    HistoricalTableComponent,
+    SpinnerComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

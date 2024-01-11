@@ -27,6 +27,7 @@ export class CurrencyConverterComponent implements OnInit {
   staticAmounts = [1, 10, 50, 100, 1000];
 
   currencies: any;
+  loading: boolean = false;
 
   constructor(private currenciesService: CurrenciesConvertService) {}
 
@@ -73,8 +74,10 @@ export class CurrencyConverterComponent implements OnInit {
 
   // Get all keys and values from api object in selected option value
   getCurrencies() {
+    this.loading = true;
     this.currenciesService.getAllCurrencies().subscribe((res: any) => {
       this.currencies = res;
+      this.loading = false;
       if (this.isHome) {
         this.currenciesCode = Object.keys(this.currencies);
       } else {
@@ -85,10 +88,12 @@ export class CurrencyConverterComponent implements OnInit {
 
   // Get all rates in api latest to use in OnConvertCurrency method(calculate the convertedAmount value)
   getRates() {
+    this.loading = true;
     let latestRates: Rates;
     this.currenciesService.getLatestRates().subscribe((data: any) => {
       latestRates = data;
       this.exchangeRates = latestRates.rates;
+      this.loading = false;
     });
   }
 

@@ -30,6 +30,8 @@ export class DetailsComponent implements OnInit {
   currentDate: Date = new Date();
   rates!: number;
 
+  loading: boolean = false;
+
   constructor(private currenciesService: CurrenciesConvertService) {
     // Use in Currency-converter component
     this.amount = this.currenciesService.amountValue;
@@ -52,11 +54,13 @@ export class DetailsComponent implements OnInit {
 
   // Get rates to calculate the converted amount in staticToCurrencies
   getRates() {
+    this.loading = true;
     let latestRates: Rates;
     this.currenciesService.getLatestRates().subscribe((data: any) => {
       latestRates = data;
       this.exchangeRates = latestRates.rates;
       this.rateValues();
+      this.loading = false;
     });
   }
 
@@ -73,6 +77,7 @@ export class DetailsComponent implements OnInit {
     let historicalRates: any;
     let fromRate: any;
     let toRate: any;
+    this.loading = true;
 
     // Same day last month
     let sameDayLastMonth: string = new Date(
@@ -90,6 +95,7 @@ export class DetailsComponent implements OnInit {
         fromRate = historicalRates[this.fromCode];
         toRate = historicalRates[this.toCode];
         this.convertedAmountLastMonth = (this.amount / fromRate) * toRate;
+        this.loading = false;
       });
 
     // Same day last year
@@ -108,6 +114,7 @@ export class DetailsComponent implements OnInit {
         fromRate = historicalRates[this.fromCode];
         toRate = historicalRates[this.toCode];
         this.convertedAmountLastYear = (this.amount / fromRate) * toRate;
+        this.loading = false;
       });
 
     // Yesterday
@@ -125,6 +132,7 @@ export class DetailsComponent implements OnInit {
         fromRate = historicalRates[this.fromCode];
         toRate = historicalRates[this.toCode];
         this.convertedAmountLastDay = (this.amount / fromRate) * toRate;
+        this.loading = false;
       });
   }
 }
