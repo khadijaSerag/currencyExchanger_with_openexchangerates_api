@@ -17,7 +17,6 @@ export class CurrenciesConvertService {
   fromRateValue!: number;
   toRateValue!: number;
 
-  // accessKey: string = '2ef0392559e2842b87140f472d056ad8'; //// With use fixer api
   accessKey: string = 'bfd5e3a3eab64707ba85cd18009773ac';
   paramsKey = new HttpParams();
 
