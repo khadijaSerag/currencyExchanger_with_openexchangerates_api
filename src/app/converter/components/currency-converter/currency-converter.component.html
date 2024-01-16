@@ -7,7 +7,7 @@
 
     <!-- Amount input -->
     <div class="d-flex justify-content-center align-items-center mt-3 mb-3">
-        <input type="staticAmount" min="1" class="form-control w-50" placeholder="Enter the amount" [(ngModel)]="amount"
+        <input type="number" min="1" class="form-control w-50" placeholder="Enter the amount" [(ngModel)]="amount"
             (keyup)="onKeyUp()" required [disabled]="!isHome">
     </div>
 
