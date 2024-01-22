@@ -12,4 +12,8 @@ export class HistoricalTableComponent {
   @Input() convertedAmountInLastDay!: number;
   @Input() convertedAmountInLastMonth!: number;
   @Input() convertedAmountInLastYear!: number;
+
+  @Input() sameDayLastMonth!: string;
+  @Input() sameDayLastYear!: string;
+  @Input() yesterday!: string;
 }

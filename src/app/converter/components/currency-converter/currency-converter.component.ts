@@ -15,11 +15,11 @@ export class CurrencyConverterComponent implements OnInit {
 
   @Input() fromCurrency!: string;
   @Input() toCurrency!: string;
+  @Input() convertedAmount: any;
 
   @Input() isHome: boolean = true;
 
   exchangeRates: any;
-  @Input() convertedAmount: any;
 
   fromRate!: number;
   toRate!: number;
@@ -34,6 +34,10 @@ export class CurrencyConverterComponent implements OnInit {
   ngOnInit() {
     this.getCurrencies();
     this.getRates();
+
+    // when click on button backToHome continue save the same data that in datails to show in home again
+    // save the data to show [ from details(parent) to home (child) ] so that I used @Input
+    // but when I want to save and show data from [ home (child) to datails (parent) ] i use the variables in service
     if (this.isHome) {
       this.fromCurrency = this.currenciesService.fromKey
         ? this.currenciesService.fromKey

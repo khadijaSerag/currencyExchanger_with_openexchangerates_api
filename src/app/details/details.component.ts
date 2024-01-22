@@ -27,6 +27,10 @@ export class DetailsComponent implements OnInit {
   convertedAmountLastMonth!: number;
   convertedAmountLastYear!: number;
 
+  sameDayLastMonth: string = '';
+  sameDayLastYear: string = '';
+  yesterday: string = '';
+
   currentDate: Date = new Date();
   rates!: number;
 
@@ -77,62 +81,61 @@ export class DetailsComponent implements OnInit {
     let historicalRates: any;
     let fromRate: any;
     let toRate: any;
-    this.loading = true;
 
     // Same day last month
-    let sameDayLastMonth: string = new Date(
+    this.sameDayLastMonth = new Date(
       this.currentDate.getFullYear(),
-      this.currentDate.getMonth(),
-      0
+      this.currentDate.getMonth() - 1,
+      this.currentDate.getDate() + 1
     )
       .toISOString()
       .split('T')[0];
 
     this.currenciesService
-      .getAllHistoricalRates(sameDayLastMonth)
+      .getAllHistoricalRates(this.sameDayLastMonth)
       .subscribe((res: any) => {
+        console.log('sameDayLastMonth', this.sameDayLastMonth);
         historicalRates = res.rates;
         fromRate = historicalRates[this.fromCode];
         toRate = historicalRates[this.toCode];
         this.convertedAmountLastMonth = (this.amount / fromRate) * toRate;
-        this.loading = false;
       });
 
     // Same day last year
-    let sameDayLastYear: string = new Date(
+    this.sameDayLastYear = new Date(
       this.currentDate.getFullYear() - 1,
+      this.currentDate.getMonth(),
+      this.currentDate.getDate() + 1
+    )
+      .toISOString()
+      .split('T')[0];
+
+    this.currenciesService
+      .getAllHistoricalRates(this.sameDayLastYear)
+      .subscribe((res: any) => {
+        console.log('sameDayLastYear', this.sameDayLastYear);
+        historicalRates = res.rates;
+        fromRate = historicalRates[this.fromCode];
+        toRate = historicalRates[this.toCode];
+        this.convertedAmountLastYear = (this.amount / fromRate) * toRate;
+      });
+
+    // Yesterday
+    this.yesterday = new Date(
+      this.currentDate.getFullYear(),
       this.currentDate.getMonth(),
       this.currentDate.getDate()
     )
       .toISOString()
       .split('T')[0];
-
     this.currenciesService
-      .getAllHistoricalRates(sameDayLastYear)
+      .getAllHistoricalRates(this.yesterday)
       .subscribe((res: any) => {
-        historicalRates = res.rates;
-        fromRate = historicalRates[this.fromCode];
-        toRate = historicalRates[this.toCode];
-        this.convertedAmountLastYear = (this.amount / fromRate) * toRate;
-        this.loading = false;
-      });
-
-    // Yesterday
-    let yesterday: string = new Date(
-      this.currentDate.getFullYear(),
-      this.currentDate.getMonth(),
-      this.currentDate.getDate() - 1
-    )
-      .toISOString()
-      .split('T')[0];
-    this.currenciesService
-      .getAllHistoricalRates(yesterday)
-      .subscribe((res: any) => {
+        console.log('yes', this.yesterday);
         historicalRates = res.rates;
         fromRate = historicalRates[this.fromCode];
         toRate = historicalRates[this.toCode];
         this.convertedAmountLastDay = (this.amount / fromRate) * toRate;
-        this.loading = false;
       });
   }
 }

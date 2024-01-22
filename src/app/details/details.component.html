@@ -11,7 +11,8 @@
 
       <div class="row mb-2" *ngIf="amount && fromCode">
          <div class="col-lg-12 col-md-12 col-sm-12">
-            <app-historical-table [fromKey]="fromCode" [toKey]="toCode"
+            <app-historical-table [fromKey]="fromCode" [toKey]="toCode" [sameDayLastMonth]="sameDayLastMonth"
+               [sameDayLastYear]="sameDayLastYear" [yesterday]="yesterday"
                [convertedAmountInLastDay]="convertedAmountLastDay"
                [convertedAmountInLastMonth]="convertedAmountLastMonth"
                [convertedAmountInLastYear]="convertedAmountLastYear"></app-historical-table>
